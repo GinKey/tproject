@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'пароль',
-    database: 'базаданных'
+    password: '',
+    database: 'yourdatabase'
 });
 
 db.connect(error => {
@@ -84,6 +84,17 @@ app.post('/participants', (req, res) => {
         res.status(201).send(`Participant added with ID: ${results.insertId}`);
     });
 });
+
+app.delete('/participants/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('DELETE FROM participants WHERE id = ?', [id], (error, results) => {
+        if (error) {
+            return res.status(500).send('Ошибка при удалении участника');
+        }
+        res.send('Участник удален');
+    });
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

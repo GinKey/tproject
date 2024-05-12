@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import DataTable from 'react-data-table-component';
 
-const columns = [
+const columns = (handleDelete) => [
     {
         name: 'Пол',
         selector: row => row.gender,
@@ -22,15 +21,38 @@ const columns = [
         name: 'Фамилия',
         selector: row => row.last_name,
         sortable: true,
+    },
+    {
+        name: 'Действия',
+        button: true,
+        cell: row => (
+            <button onClick={() => handleDelete(row.id)}>
+                Удалить
+            </button>
+        ),
     }
 ];
 
-const ParticipantsTable = ({ data }) => {
+const ParticipantsTable = ({ data, onDelete }) => {
+    const handleDelete = (id) => {
+        if (window.confirm('Вы уверены, что хотите удалить этого участника?')) {
+            fetch(`http://localhost:3001/participants/${id}`, { method: 'DELETE' })
+                .then(() => {
+                    onDelete();
+                    alert('Участник удален');
+                })
+                .catch(error => {
+                    alert('Ошибка при удалении участника');
+                    console.error('Error:', error);
+                });
+        }
+    };
+
     return (
         <>
-            <h2 style={{marginLeft: "10px"}}>Участники</h2>
+            <h2 style={{ marginLeft: "10px" }}>Участники</h2>
             <DataTable
-                columns={columns}
+                columns={columns(handleDelete)}
                 data={data}
                 defaultSortFieldId={1}
                 pagination
