@@ -9,6 +9,7 @@ const port = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+//accept left
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
