@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# tproject
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
+
+This project is a Node.js application using Express and MySQL.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `npm install`
+Installs the necessary dependencies for the project.
+
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the React app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload when you make changes.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed!
 
 ### `npm run eject`
+**Note: this is a one-way operation. Once you `eject`, you can't go back!** If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Environment Configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To configure the environment variables, follow these steps: 
+1. Create a file named `.env` in the root directory of your project.
+2. Copy the contents of `.env.example` to `.env`:
+   ```sh
+   cp .env.example .env
+   ```
+3. Update the values in `.env` with your database configuration:
+   ```plaintext
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=yourpassword
+   DB_NAME=for_server
+   PORT=3001
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Running the Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run the server, execute the following command:
+   ```sh
+   node src/server/server.js
+   ```
+The server will start on the port specified in your `.env` file.
 
+## API Endpoints
+
+### Get all activities
+- **URL**: `/activity`
+- **Method**: `GET`
+- **Description**: Returns a list of all activities.
+
+### Add a new activity
+- **URL**: `/activity`
+- **Method**: `POST`
+- **Description**: Adds a new activity.
+- **Request Body**:
+   ```json
+   {
+     "activity": "Description of the activity"
+   }
+   ```
+
+### Delete an activity
+- **URL**: `/activity/:id`
+- **Method**: `DELETE`
+- **Description**: Deletes an activity by ID.
+
+## Project Structure
+
+```
+tproject/
+├── src/
+│   └── server/
+│       └── server.js
+├── .env.example
+├── .gitignore
+├── package.json
+└── README.md
+```
 ## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started). To learn React, check out the [React documentation](https://reactjs.org/).
