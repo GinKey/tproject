@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import ParticipantsTable from './components/ParticipantsTable';
 import AddParticipantForm from './components/AddParticipantForm';
@@ -42,6 +42,10 @@ const App = () => {
         fetchData();
     };
 
+    const handleUpdateParticipant = () => {
+        fetchData();
+    };
+
     return (
         <Router>
             <div className="App">
@@ -57,7 +61,7 @@ const App = () => {
                                 {showAddForm && <AddParticipantForm onClose={handleCloseForm} />}
                             </>
                         } />
-                        <Route path="/profile/:id" element={<ProfilePage />} />
+                        <Route path="/profile/:id" element={<ProfilePage onUpdate={handleUpdateParticipant} />} />
                     </Routes>
                 </div>
             </div>

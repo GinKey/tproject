@@ -1,9 +1,6 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
-import StatusIndicator from './StatusIndicator';
-import Checkbox from './Checkbox';
 
-// Определение столбцов для таблицы activity_log
 const columns = [
     {
         name: 'Действие',
@@ -26,7 +23,6 @@ const columns = [
         format: row => new Date(row.action_time).toLocaleString(),
         sortable: true,
     },
-    // Вы можете добавить другие столбцы по необходимости
 ];
 
 const ActivityTable = ({ data }) => (

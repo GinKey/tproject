@@ -77,6 +77,14 @@ app.get('/participants', (req, res) => {
     });
 });
 
+app.get('/participants/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('SELECT * FROM participants WHERE id = ?', [id], (error, results) => {
+        if (error) throw error;
+        res.json(results[0]);
+    });
+});
+
 app.post('/participants', (req, res) => {
     const data = req.body;
     const query = 'INSERT INTO participants SET ?';
@@ -84,6 +92,17 @@ app.post('/participants', (req, res) => {
     db.query(query, data, (error, results) => {
         if (error) throw error;
         res.status(201).send(`Participant added with ID: ${results.insertId}`);
+    });
+});
+
+app.put('/participants/:id', (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+    const query = 'UPDATE participants SET ? WHERE id = ?';
+
+    db.query(query, [data, id], (error, results) => {
+        if (error) throw error;
+        res.send('Participant updated');
     });
 });
 
@@ -96,7 +115,6 @@ app.delete('/participants/:id', (req, res) => {
         res.send('Участник удален');
     });
 });
-
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
