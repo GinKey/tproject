@@ -1,0 +1,28 @@
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    overflow: hidden; /* Добавляем, чтобы избежать обрезания */
+}
+
+.edit-button, .delete-button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}

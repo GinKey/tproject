@@ -1,7 +1,9 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
+import { useNavigate } from 'react-router-dom';
+import '../css/ParticipantsTable.css'; // Импорт файла CSS
 
-const columns = (handleDelete) => [
+const columns = (handleDelete, handleEdit) => [
     {
         name: 'Пол',
         selector: row => row.gender,
@@ -25,15 +27,19 @@ const columns = (handleDelete) => [
     {
         name: 'Действия',
         button: true,
+        width: '220px',
         cell: row => (
-            <button onClick={() => handleDelete(row.id)}>
-                Удалить
-            </button>
+            <div className="action-buttons">
+                <button className="edit-button" onClick={() => handleEdit(row.id)}>Редактировать</button>
+                <button className="delete-button" onClick={() => handleDelete(row.id)}>Удалить</button>
+            </div>
         ),
     }
 ];
 
 const ParticipantsTable = ({ data, onDelete }) => {
+    const navigate = useNavigate();
+
     const handleDelete = (id) => {
         if (window.confirm('Вы уверены, что хотите удалить этого участника?')) {
             fetch(`http://localhost:3001/participants/${id}`, { method: 'DELETE' })
@@ -48,11 +54,15 @@ const ParticipantsTable = ({ data, onDelete }) => {
         }
     };
 
+    const handleEdit = (id) => {
+        navigate(`/profile/${id}`);
+    };
+
     return (
         <>
             <h2 style={{ marginLeft: "10px" }}>Участники</h2>
             <DataTable
-                columns={columns(handleDelete)}
+                columns={columns(handleDelete, handleEdit)}
                 data={data}
                 defaultSortFieldId={1}
                 pagination
